@@ -1,0 +1,149 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      text-align: center;
+      color: #fff;
+      padding: 40px;
+      max-width: 600px;
+      animation: fadeIn 1s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 15px 0;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1em;
+      border: none;
+      border-radius: 30px;
+      background: #fff;
+      color: #ff6b81;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #ffe6ea;
+    }
+
+    .hearts {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s infinite ease-in;
+      opacity: 0.7;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-120vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide 1 -->
+  <div class="slide active">
+    <h1>Hey you ❤️</h1>
+    <p>I made something just for you.</p>
+    <button onclick="nextSlide()">Tap to continue 💌</button>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide">
+    <h1>You’re special ✨</h1>
+    <p>Your smile makes everything better.</p>
+    <p>You feel like home.</p>
+    <p>I’m so lucky to have you.</p>
+    <button onclick="nextSlide()">Keep going 💕</button>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide">
+    <h1>Us 💫</h1>
+    <p>Every moment with you is my favorite.</p>
+    <p>And I can’t wait to make so many more memories.</p>
+    <button onclick="nextSlide()">One more thing… 👀</button>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide">
+    <h1>So…</h1>
+    <p>I’ve been meaning to ask you something.</p>
+    <button onclick="nextSlide()">I’m listening 😌</button>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide">
+    <h1>Will you be my Valentine? 💘</h1>
+    <button onclick="celebrate()">YES 💖</button>
+    <button onclick="celebrate()">Of course 😘</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide++;
+      slides[currentSlide].classList.add('active');
+    }
+
+    function celebrate() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'hearts';
+        heart.innerText = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }
+
+      alert("You just made me the happiest person ever 💕");
+    }
+  </script>
+
+</body>
+</html>
