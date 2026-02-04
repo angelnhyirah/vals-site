@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>For You ❤️</title>
   <style>
     * {
@@ -83,7 +84,7 @@
   <div class="slide active">
     <h1>Hey you ❤️</h1>
     <p>I made something just for you.</p>
-    <button onclick="nextSlide()">Tap to continue 💌</button>
+    <button class="btn-next">Tap to continue 💌</button>
   </div>
 
   <!-- Slide 2 -->
@@ -92,7 +93,7 @@
     <p>Your smile makes everything better.</p>
     <p>You feel like home.</p>
     <p>I’m so lucky to have you.</p>
-    <button onclick="nextSlide()">Keep going 💕</button>
+    <button class="btn-next">Keep going 💕</button>
   </div>
 
   <!-- Slide 3 -->
@@ -100,31 +101,36 @@
     <h1>Us 💫</h1>
     <p>Every moment with you is my favorite.</p>
     <p>And I can’t wait to make so many more memories.</p>
-    <button onclick="nextSlide()">One more thing… 👀</button>
+    <button class="btn-next">One more thing… 👀</button>
   </div>
 
   <!-- Slide 4 -->
   <div class="slide">
     <h1>So…</h1>
     <p>I’ve been meaning to ask you something.</p>
-    <button onclick="nextSlide()">I’m listening 😌</button>
+    <button class="btn-next">I’m listening 😌</button>
   </div>
 
   <!-- Slide 5 -->
   <div class="slide">
     <h1>Will you be my Valentine? 💘</h1>
-    <button onclick="celebrate()">YES 💖</button>
-    <button onclick="celebrate()">Of course 😘</button>
+    <button class="btn-celebrate">YES 💖</button>
+    <button class="btn-celebrate">Of course 😘</button>
   </div>
 
   <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
 
-    function nextSlide() {
-      slides[currentSlide].classList.remove('active');
-      currentSlide++;
+    function showSlide(index) {
+      slides.forEach(s => s.classList.remove('active'));
+      currentSlide = Math.max(0, Math.min(index, slides.length - 1));
       slides[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+      if (currentSlide >= slides.length - 1) return; // already at last slide
+      showSlide(currentSlide + 1);
     }
 
     function celebrate() {
@@ -143,6 +149,12 @@
 
       alert("You just made me the happiest person ever 💕");
     }
+
+    // Attach listeners (works even when inline handlers are blocked by CSP)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.btn-next').forEach(btn => btn.addEventListener('click', nextSlide));
+      document.querySelectorAll('.btn-celebrate').forEach(btn => btn.addEventListener('click', celebrate));
+    });
   </script>
 
 </body>
